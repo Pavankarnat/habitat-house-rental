@@ -44,7 +44,7 @@ interface Property {
   is_sample: boolean;
 }
 
-const API = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
+const API = import.meta.env.VITE_API_URL || (import.meta.env.VITE_BACKEND_URL ? `${import.meta.env.VITE_BACKEND_URL}/api` : '/api');
 
 const money = (v: number | null | undefined) =>
   v == null ? '—' : new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(v);
@@ -244,7 +244,7 @@ export default function App() {
         setCompareSelected(lRes.data.slice(0, 4).map((x: any) => x.id));
       }
     } catch (e: any) {
-      setError(`Could not connect to the backend at ${API}. Please ensure FastAPI is running on port 8080.`);
+      setError(`Could not connect to the backend at ${API}. Please ensure the backend service is running.`);
     } finally {
       setLoading(false);
     }
