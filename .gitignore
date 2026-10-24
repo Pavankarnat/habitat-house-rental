@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 .env
 *.db
+!backend/housing.db
 .pytest_cache/
 
 # Node
